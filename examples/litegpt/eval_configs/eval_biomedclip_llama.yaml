@@ -1,12 +1,12 @@
 model:
-  arch: medlvlm
+  arch: silvar
   model_type: pretrain
   max_txt_len: 1500
   image_size: 224
   end_sym: </s>
   language_model: meta-llama/Llama-2-7b-chat-hf
   vision_model: biomed_clip
-  ckpt: medlvlm/Result4/biomedClipLamaVindata-global/20240710175/checkpoint_9.pth
+  ckpt: silvar/Result4/biomedClipLamaVindata-global/20240710175/checkpoint_9.pth
   use_grad_checkpoint: true
   chat_template: true
   low_resource: true
@@ -36,5 +36,5 @@ evaluation_datasets:
     do_sample: true
 run:
   task: image_text_pretrain
-  name: medlvlm_evaluation
+  name: silvar_evaluation
   save_path: Hanh/Test_biomed_clip

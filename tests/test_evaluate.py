@@ -1,12 +1,12 @@
 import os
 import argparse
 import json
-from medlvlm.datasets.datasets.vindrcxr_dataset import VinDrCXRDataset
+from silvar.datasets.datasets.vindrcxr_dataset import VinDrCXRDataset
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-from medlvlm.common.registry import registry
-from medlvlm.common.config import Config
-from medlvlm.conversation.conversation import Conversation, SeparatorStyle
+from silvar.common.registry import registry
+from silvar.common.config import Config
+from silvar.conversation.conversation import Conversation, SeparatorStyle
 
 CONV_VISION = Conversation(
     system="",

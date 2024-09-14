@@ -1,5 +1,5 @@
 model:
-  arch: medlvlm
+  arch: silvar
   model_type: pretrain
   max_txt_len: 1024
   image_size: 224
@@ -34,5 +34,5 @@ evaluation_datasets:
     do_sample: true
 run:
   task: image_text_pretrain
-  name: medlvlm_evaluation
+  name: silvar_evaluation
   save_path: "/path/to/save/folder_path"

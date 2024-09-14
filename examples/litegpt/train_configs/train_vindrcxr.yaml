@@ -1,5 +1,5 @@
 model:
-  arch: medlvlm
+  arch: silvar
   model_type: pretrain
   max_txt_len: 1024
   image_size: 224
@@ -56,4 +56,4 @@ run:
 
   wandb_log: True
   wandb_token: "<your wandb token>"
-  job_name: medlvlm_finetune_vindrcxr
+  job_name: silvar_finetune_vindrcxr

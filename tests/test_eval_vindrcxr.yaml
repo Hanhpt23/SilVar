@@ -1,5 +1,5 @@
 model:
-  arch: medlvlm
+  arch: silvar
   model_type: pretrain
   max_txt_len: 1024
   image_size: 224
@@ -7,7 +7,7 @@ model:
   language_model: meta-llama/Llama-2-7b-chat-hf
   vision_model: biomed_clip
   audio_model: whisper
-  ckpt: medlvlm/Hanh/Test_biomed_clip/20240904103/checkpoint_0.pth
+  ckpt: silvar/Hanh/Test_biomed_clip/20240904103/checkpoint_0.pth
   use_grad_checkpoint: true
   chat_template: true
   low_resource: true
@@ -37,5 +37,5 @@ evaluation_datasets:
     do_sample: true
 run:
   task: image_text_pretrain
-  name: medlvlm_evaluation
-  save_path: medlvlm/Hanh/Test_biomed_clip
+  name: silvar_evaluation
+  save_path: silvar/Hanh/Test_biomed_clip

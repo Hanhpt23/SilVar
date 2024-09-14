@@ -1,5 +1,5 @@
 model:
-  arch: medlvlm
+  arch: silvar
   model_type: pretrain
   max_txt_len: 1024
   image_size: 224
@@ -7,7 +7,7 @@ model:
   language_model: meta-llama/Llama-2-7b-chat-hf
   vision_model: biomed_clip
   audio_model: whisper
-  ckpt: medlvlm/Hanh/Test_biomed_clip/20240904173/checkpoint_1.pth
+  ckpt: silvar/Hanh/Test_biomed_clip/20240904173/checkpoint_1.pth
   use_grad_checkpoint: true
   chat_template: true
   low_resource: true
@@ -33,7 +33,7 @@ evaluation_datasets:
     prompt_test: '[vqa] Given the provided chest X-ray image, which of the following
       diagnoses are present (select all that apply): COPD, Lung Tumor, Pneumonia,
       Tuberculosis, Other Disease, or No Finding?'
-    audio_path: medlvlm/datasets/example_datasets/audio_datasets
+    audio_path: silvar/datasets/example_datasets/audio_datasets
     batch_size: 2
     max_new_tokens: 512
     temperature: 0.1
@@ -41,5 +41,5 @@ evaluation_datasets:
     do_sample: true
 run:
   task: image_text_pretrain
-  name: medlvlm_evaluation
-  save_path: medlvlm/Hanh/Test_biomed_clip
+  name: silvar_evaluation
+  save_path: silvar/Hanh/Test_biomed_clip

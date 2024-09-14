@@ -1,5 +1,5 @@
 model:
-  arch: medlvlm
+  arch: silvar
   model_type: pretrain
   max_txt_len: 1024
   image_size: 224
@@ -7,7 +7,7 @@ model:
   vision_model: "biomed_clip"
   audio_model: "whisper"
   language_model: "meta-llama/Llama-2-7b-chat-hf"
-  ckpt: "../Minigpt_Med_mainNew_global/LVLM-Med/medlvlm/Result/biomedClipLamaVindata-global/20240705222/checkpoint_9.pth"
+  ckpt: "../Minigpt_Med_mainNew_global/LVLM-Med/silvar/Result/biomedClipLamaVindata-global/20240705222/checkpoint_9.pth"
   use_grad_checkpoint: True
   chat_template: True
   low_resource: True

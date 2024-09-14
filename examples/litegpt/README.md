@@ -42,8 +42,8 @@ We provide different visual encoders with the following keywords:
 After selecting the visual encoder you want, set it [here](train_configs/train_vindrcxr.yaml#L7) at Line 7, and [here](eval_configs/eval_biomedclip_llama.yaml#L8) at Line 8.
 
 ### Set Paths for Training
-- Set the training image path to `root/images/train` [here](medlvlm/configs/datasets/vindrcxr/default.yaml#L5) at Line 5.
-- Set the training annotations path to `root/annotations/test/grounded_diseases_train.json` [here](medlvlm/configs/datasets/vindrcxr/default.yaml#L6) at Line 6.
+- Set the training image path to `root/images/train` [here](silvar/configs/datasets/vindrcxr/default.yaml#L5) at Line 5.
+- Set the training annotations path to `root/annotations/test/grounded_diseases_train.json` [here](silvar/configs/datasets/vindrcxr/default.yaml#L6) at Line 6.
 - Set the pretrained checkpoint path to `root/pretrained_checkpoint/checkpoint_stage3.pth` [here](train_configs/train_vindrcxr.yaml#L9) at Line 9.
 - Set the checkpoint save path [here](train_configs/train_vindrcxr.yaml#L44) at Line 44.
 - If you set `wandb_log` to `true` [here](train_configs/train_vindrcxr.yaml#L57) at Line 57, you need to set the `wandb_token` [here](train_configs/train_vindrcxr.yaml#L58) at Line 58 to enable tracking.

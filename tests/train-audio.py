@@ -16,23 +16,23 @@ import torch
 import torch.backends.cudnn as cudnn
 import wandb
 
-import medlvlm.tasks as tasks
-from medlvlm.common.config import Config
-from medlvlm.common.dist_utils import get_rank, init_distributed_mode
-from medlvlm.common.logger import setup_logger
-from medlvlm.common.optims import (
+import silvar.tasks as tasks
+from silvar.common.config import Config
+from silvar.common.dist_utils import get_rank, init_distributed_mode
+from silvar.common.logger import setup_logger
+from silvar.common.optims import (
     LinearWarmupCosineLRScheduler,
     LinearWarmupStepLRScheduler,
 )
-from medlvlm.common.registry import registry
-from medlvlm.common.utils import now
+from silvar.common.registry import registry
+from silvar.common.utils import now
 
 # imports modules for registration
-from medlvlm.models import *
+from silvar.models import *
 from tests.evaluate_audio import *
-from medlvlm.processors import *
-from medlvlm.runners import *
-from medlvlm.tasks import *
+from silvar.processors import *
+from silvar.runners import *
+from silvar.tasks import *
 
 def list_of_str(arg):
     return list(map(str, arg.split(',')))
@@ -112,7 +112,7 @@ def main():
     if hasattr(args, 'cfg_eval_path'):
         args.cfg_path = args.cfg_eval_path
 
-        model_path = "medlvlm/{}/{}".format(cfg.run_cfg.output_dir, job_id)
+        model_path = "silvar/{}/{}".format(cfg.run_cfg.output_dir, job_id)
         ckpt_paths = glob.glob(os.path.join(model_path, "*.pth"))
         ckpt_names = [os.path.basename(ckp_path) for ckp_path in ckpt_paths]
         last_ckpt_name = sorted(ckpt_names, key=lambda x: int(x.split(".")[0].split("_")[-1]))[-1]
