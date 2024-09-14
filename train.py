@@ -29,7 +29,7 @@ from silvar.common.utils import now
 
 # imports modules for registration
 from silvar.models import *
-from examples.litegpt.evaluate import *
+from evaluate import *
 from silvar.processors import *
 from silvar.runners import *
 from silvar.tasks import *
@@ -83,6 +83,8 @@ def main():
     job_id = now()
     args = parse_args()
     cfg = Config(args)
+
+    print(cfg)
 
     init_distributed_mode(cfg.run_cfg)
     setup_seeds(cfg)

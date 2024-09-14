@@ -1,5 +1,5 @@
 model:
-  arch: medlvlm
+  arch: silvar
 
   # vision encoder
   vision_model: "eva_clip_g"

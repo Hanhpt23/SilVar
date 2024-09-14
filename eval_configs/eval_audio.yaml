@@ -1,12 +1,13 @@
 model:
   arch: silvar
   model_type: pretrain
-  max_txt_len: 1500
+  max_txt_len: 1024
   image_size: 224
   end_sym: </s>
   language_model: meta-llama/Llama-2-7b-chat-hf
   vision_model: biomed_clip
-  ckpt: silvar/Result4/biomedClipLamaVindata-global/20240710175/checkpoint_9.pth
+  audio_model: whisper
+  ckpt: silvar/Hanh/Test_biomed_clip/20240914184/checkpoint_1.pth
   use_grad_checkpoint: true
   chat_template: true
   low_resource: true
@@ -14,7 +15,10 @@ model:
   lora_alpha: 16
   bits: 8
 datasets:
-  vindrcxr_train:
+  audio_train:
+    audio_processor:
+      train:
+        name: whisper_processor
     vis_processor:
       train:
         name: blip2_image_eval
@@ -23,13 +27,14 @@ datasets:
       train:
         name: blip_caption
 evaluation_datasets:
-  vindrcxr_val:
-    eval_file_path: ../../../Minigpt_Med/LVLM-Med/1Vindata/vindr-cxr-images/annotations/test/global_labels_test.json
-    img_path: ../../../Minigpt_Med/LVLM-Med/1Vindata/vindr-cxr-images/images/test
+  audio_val:
+    eval_file_path: ../../Minigpt_Med/LVLM-Med/1Vindata/vindr-cxr-images/annotations/test/global_labels_test.json
+    img_path: ../../Minigpt_Med/LVLM-Med/1Vindata/vindr-cxr-images/images/test
     prompt_test: '[vqa] Given the provided chest X-ray image, which of the following
       diagnoses are present (select all that apply): COPD, Lung Tumor, Pneumonia,
       Tuberculosis, Other Disease, or No Finding?'
-    batch_size: 8
+    audio_path: silvar/datasets/example_datasets/audio_datasets
+    batch_size: 2
     max_new_tokens: 512
     temperature: 0.1
     top_p: 0.9
@@ -37,4 +42,4 @@ evaluation_datasets:
 run:
   task: image_text_pretrain
   name: silvar_evaluation
-  save_path: Hanh/Test_biomed_clip
+  save_path: silvar/Hanh/Test_biomed_clip

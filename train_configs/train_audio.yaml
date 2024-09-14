@@ -7,7 +7,7 @@ model:
   vision_model: "biomed_clip"
   audio_model: "whisper"
   language_model: "meta-llama/Llama-2-7b-chat-hf"
-  ckpt: "../Minigpt_Med_mainNew_global/LVLM-Med/silvar/Result/biomedClipLamaVindata-global/20240705222/checkpoint_9.pth"
+  ckpt: 
   use_grad_checkpoint: True
   chat_template: True
   low_resource: True
@@ -44,7 +44,7 @@ run:
   max_epoch: 2
   num_workers: 2
   warmup_steps: 1000
-  iters_per_epoch: 3718
+  iters_per_epoch: 1
 
   seed: 42
   output_dir: "Hanh/Test_biomed_clip"

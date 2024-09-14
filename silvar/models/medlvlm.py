@@ -12,14 +12,14 @@ from silvar.models.medlvlm_base import MedLVLMBase
 
 IMG_DIM_VIT_LLAMA = 5632 # 1408 * 4
 
-@registry.register_model("medlvlm")
+@registry.register_model("silvar")
 class MedLVLM(MedLVLMBase):
     """
     MedLVLM model
     """
 
     PRETRAINED_MODEL_CONFIG_DICT = {
-        "pretrain": "configs/models/medlvlm.yaml",
+        "pretrain": "configs/models/silvar.yaml",
     }
 
     def __init__(
