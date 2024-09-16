@@ -8,14 +8,14 @@ import torch.nn as nn
 
 from silvar.common.registry import registry
 from silvar.models.base_model import disabled_train
-from silvar.models.medlvlm_base import MedLVLMBase
+from silvar.models.silvar_base import SilVarBase
 
 IMG_DIM_VIT_LLAMA = 5632 # 1408 * 4
 
 @registry.register_model("silvar")
-class MedLVLM(MedLVLMBase):
+class SilVar(SilVarBase):
     """
-    MedLVLM model
+    SilVar model
     """
 
     PRETRAINED_MODEL_CONFIG_DICT = {

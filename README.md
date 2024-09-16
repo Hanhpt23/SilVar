@@ -1,4 +1,4 @@
-# AGI
+# SILVAR-Speech Instruction and Large Visual Language for Localization Reasoning
 
 ```bash
 git clone --branch asr2llm https://github.com/leduckhai/LiteGPT.git

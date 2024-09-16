@@ -6,7 +6,7 @@ model:
   end_sym: "</s>"
   vision_model: "biomed_clip"
   audio_model: "whisper"
-  language_model: "meta-llama/Llama-2-7b-chat-hf"
+  language_model: "meta-llama/Meta-Llama-3-8B"
   ckpt: 
   use_grad_checkpoint: True
   chat_template: True
@@ -31,7 +31,11 @@ datasets:
       train:
         name: "blip_caption"
     sample_ratio: 10
-    
+    build_info:
+      image_path: ../data/LISA/images
+      ann_path: ../data/LISA/json/train.json
+      audio_path: ../data/LISA/audio_wav
+
 run:
   task: image_text_pretrain
   # optimizer
@@ -41,13 +45,13 @@ run:
   warmup_lr: 1e-6
 
   weight_decay: 0.05
-  max_epoch: 2
+  max_epoch: 20
   num_workers: 2
   warmup_steps: 1000
-  iters_per_epoch: 1
+  iters_per_epoch: 60
 
   seed: 42
-  output_dir: "Hanh/Test_biomed_clip"
+  output_dir: "Hanh/Test-silvar"
 
   amp: True
   resume_ckpt_path: null

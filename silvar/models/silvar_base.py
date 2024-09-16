@@ -11,9 +11,9 @@ from transformers import StoppingCriteria, StoppingCriteriaList
 
 from silvar.conversation.conversation import StoppingCriteriaSub
 
-class MedLVLMBase(BaseModel):
+class SilVarBase(BaseModel):
     """
-    Base class for MedLVLMBase
+    Base class for SilVarBase
     """
 
     def __init__(

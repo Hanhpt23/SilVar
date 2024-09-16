@@ -18,6 +18,9 @@ model:
 
 
 preprocess:
+    audio_processor: 
+        train:
+          name: 'whisper_processor'
     vis_processor:
         train:
           name: "blip2_image_train"

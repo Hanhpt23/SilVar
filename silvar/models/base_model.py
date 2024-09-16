@@ -220,6 +220,9 @@ class BaseModel(nn.Module):
         if "llama" in language_model_path.lower():
             from silvar.models.language_model.modeling_llama import LlamaForCausalLM
             model = LlamaForCausalLM.from_pretrained(**model_args)
+        elif "3-8b" in language_model_path.lower():
+            from silvar.models.language_model.modeling_llama3 import LlamaForCausalLM3
+            model = LlamaForCausalLM3.from_pretrained(**model_args)
         elif "mistral" in language_model_path.lower():
             from silvar.models.language_model.modeling_mistral import MistralForCausalLM
             model = MistralForCausalLM.from_pretrained(**model_args)

@@ -4,10 +4,10 @@ model:
   max_txt_len: 1024
   image_size: 224
   end_sym: </s>
-  language_model: meta-llama/Llama-2-7b-chat-hf
+  language_model: meta-llama/Meta-Llama-3-8B
   vision_model: biomed_clip
   audio_model: whisper
-  ckpt: silvar/Hanh/Test_biomed_clip/20240914184/checkpoint_1.pth
+  ckpt: silvar/Hanh/Test-silvar/20240916172/checkpoint_1.pth
   use_grad_checkpoint: true
   chat_template: true
   low_resource: true
@@ -26,14 +26,16 @@ datasets:
     text_processor:
       train:
         name: blip_caption
+    build_info:
+      image_path: ../data/LISA/images
+      ann_path: ../data/LISA/json/train.json
+      audio_path: ../data/LISA/audio_wav
 evaluation_datasets:
   audio_val:
-    eval_file_path: ../../Minigpt_Med/LVLM-Med/1Vindata/vindr-cxr-images/annotations/test/global_labels_test.json
-    img_path: ../../Minigpt_Med/LVLM-Med/1Vindata/vindr-cxr-images/images/test
-    prompt_test: '[vqa] Given the provided chest X-ray image, which of the following
-      diagnoses are present (select all that apply): COPD, Lung Tumor, Pneumonia,
-      Tuberculosis, Other Disease, or No Finding?'
-    audio_path: silvar/datasets/example_datasets/audio_datasets
+    eval_file_path: ../data/LISA/json/train.json
+    img_path: ../data/LISA/images
+    prompt_test: ''
+    audio_path: ../data/LISA/audio
     batch_size: 2
     max_new_tokens: 512
     temperature: 0.1
@@ -42,4 +44,4 @@ evaluation_datasets:
 run:
   task: image_text_pretrain
   name: silvar_evaluation
-  save_path: silvar/Hanh/Test_biomed_clip
+  save_path: silvar/Hanh/Test-silvar
