@@ -1,17 +1,6 @@
-# SILVAR-Speech Instruction and Large Visual Language for Localization Reasoning
+# SILVAR - Reasoning Speech Instruction with Large Visual Language for Object Localization
 
 ```bash
-git clone --branch asr2llm https://github.com/leduckhai/LiteGPT.git
-cd LiteGPT
-```
-
-## Training
-
-```bash
-sbatch examples/litegpt/script/train_bioclip.sh
-```
-## Testing
-
-```bash
-sbatch examples/litegpt/script/evaluate_bioclip.sh
+git clone https://github.com/Hanhpt23/SilVar.git
+cd SilVar
 ```
