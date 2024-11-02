@@ -4,7 +4,8 @@
 ## Installation
 
 ```bash
-conda create -n litegpt python=3.10.13
+conda create -n silvar python=3.10.13
+conda activate silvar
 git clone https://github.com/Hanhpt23/SilVar.git
 cd SilVar
 pip install -r requirements.txt
