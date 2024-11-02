@@ -86,10 +86,6 @@ Silvar
             "outputs": "",
             "image": ""
       },
-      {
-            "query": "",
-            "outputs": "",
-            "image": ""
-      }
-      ]
+      ...
+]
 ```
