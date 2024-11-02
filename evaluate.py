@@ -112,9 +112,11 @@ def evaluate(args):
                                       top_p=top_p,
                                       do_sample=do_sample)
             results.extend([{"image_id": image_id, "ground_truth": gt, "predict": predict} for image_id, gt, predict in zip(image_ids, ground_truth, predicts)])
-            break
+            # break
     with open(os.path.join(cfg.run_cfg.save_path, "outputs_test.json"),"w") as jsonfile:
         json.dump(results, jsonfile, ensure_ascii=False)
+
+    print('Saving the result in: ', os.path.join(cfg.run_cfg.save_path, "outputs_test.json"))
 
 if __name__ == "__main__":
     args = parse_args()

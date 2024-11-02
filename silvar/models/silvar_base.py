@@ -80,7 +80,7 @@ class SilVarBase(BaseModel):
         self.visual_encoder.to("cpu")
         self.visual_encoder.float()
 
-    def get_context_emb(self, prompt, img_list, audio):
+    def get_context_emb(self, prompt, img_list, audio=None):
         device = img_list[0].device
         prompt_segs = prompt.split('<ImageHere>')
         assert len(prompt_segs) == len(img_list) + 1, "Unmatched numbers of image placeholders and images."
@@ -91,10 +91,20 @@ class SilVarBase(BaseModel):
         ]
         seg_embs = [self.embed_tokens(seg_t) for seg_t in seg_tokens]
 
-        mixed_embs = [emb for pair in zip(seg_embs[:-1], img_list) for emb in pair] + [seg_embs[-1], audio[0].to(self.device)] # [audio]
+        # mixed_embs = [emb for pair in zip(seg_embs[:-1], img_list) for emb in pair] + [seg_embs[-1], audio[0].to(self.device)] # [audio]
+        # mixed_embs = torch.cat(mixed_embs, dim=1)
+
+        # Interleave segment embeddings with image embeddings
+        mixed_embs = [emb for pair in zip(seg_embs[:-1], img_list) for emb in pair] + [seg_embs[-1]]
+        
+        # Handle audio: append only if audio is not None
+        if audio is not None:
+            mixed_embs.append(audio[0].to(device))
+        
+        # Concatenate along the appropriate dimension
         mixed_embs = torch.cat(mixed_embs, dim=1)
         return mixed_embs
-
+        
     def prompt_wrap(self, img_embeds, audio_embeds, img_atts, prompts, lengths=None):
         if prompts is None or len(prompts) == 0:
             # prompts is not provided, just return the original image embedding
@@ -117,33 +127,55 @@ class SilVarBase(BaseModel):
             if isinstance(prompts, str):
                 prompts = [prompts] * len(img_embeds)
 
-            for idx, (each_img_embed, each_prompt, each_audio_embed) in enumerate(zip(img_embeds, prompts, audio_embeds)):
-                pn = each_img_embed.shape[-2]
-                if lengths is not None:
-                    each_img_embed = each_img_embed.reshape(-1, each_img_embed.shape[-1])
-                    each_img_embed = each_img_embed[:lengths[idx] * pn]
-                p_segs = each_prompt.split('<ImageHere>')
-                interleave_emb = []
-                for idx, seg in enumerate(p_segs[:-1]):
+            if audio_embeds is None:
+
+                for idx, (each_img_embed, each_prompt) in enumerate(zip(img_embeds, prompts)):
+                    pn = each_img_embed.shape[-2]
+                    if lengths is not None:
+                        each_img_embed = each_img_embed.reshape(-1, each_img_embed.shape[-1])
+                        each_img_embed = each_img_embed[:lengths[idx] * pn]
+                    p_segs = each_prompt.split('<ImageHere>')
+                    interleave_emb = []
+                    for idx, seg in enumerate(p_segs[:-1]):
+                        p_tokens = self.language_tokenizer(
+                            seg, return_tensors="pt", add_special_tokens=False).to(img_embeds.device)
+                        p_embed = self.embed_tokens(p_tokens.input_ids)
+                        interleave_emb.append(torch.cat([p_embed, each_img_embed[None][:, idx * pn:(idx + 1) * pn]], dim=1))
+                    wrapped_emb = torch.cat(interleave_emb, dim=1)
                     p_tokens = self.language_tokenizer(
-                        seg, return_tensors="pt", add_special_tokens=False).to(img_embeds.device)
+                        p_segs[-1], return_tensors="pt", add_special_tokens=False).to(img_embeds.device)
                     p_embed = self.embed_tokens(p_tokens.input_ids)
-                    interleave_emb.append(torch.cat([p_embed, each_img_embed[None][:, idx * pn:(idx + 1) * pn]], dim=1))
-                wrapped_emb = torch.cat(interleave_emb, dim=1)
-                p_tokens = self.language_tokenizer(
-                    p_segs[-1], return_tensors="pt", add_special_tokens=False).to(img_embeds.device)
-                p_embed = self.embed_tokens(p_tokens.input_ids)
-
-                each_audio_embed = each_audio_embed.unsqueeze(0)
-                # print('Shape: ', wrapped_emb.shape, p_embed.shape, each_audio_embed.shape)
-
-                # each_audio_embed will be of shape [1, audio_embedding_dim]
-                if each_audio_embed is None:
                     wrapped_emb = torch.cat([wrapped_emb, p_embed], dim=1)
-                else:
-                    wrapped_emb = torch.cat([wrapped_emb, p_embed, each_audio_embed], dim=1)
-                
-                emb_lists.append(wrapped_emb)
+                    emb_lists.append(wrapped_emb)
+            else:
+
+                for idx, (each_img_embed, each_prompt, each_audio_embed) in enumerate(zip(img_embeds, prompts, audio_embeds)):
+                    pn = each_img_embed.shape[-2]
+                    if lengths is not None:
+                        each_img_embed = each_img_embed.reshape(-1, each_img_embed.shape[-1])
+                        each_img_embed = each_img_embed[:lengths[idx] * pn]
+                    p_segs = each_prompt.split('<ImageHere>')
+                    interleave_emb = []
+                    for idx, seg in enumerate(p_segs[:-1]):
+                        p_tokens = self.language_tokenizer(
+                            seg, return_tensors="pt", add_special_tokens=False).to(img_embeds.device)
+                        p_embed = self.embed_tokens(p_tokens.input_ids)
+                        interleave_emb.append(torch.cat([p_embed, each_img_embed[None][:, idx * pn:(idx + 1) * pn]], dim=1))
+                    wrapped_emb = torch.cat(interleave_emb, dim=1)
+                    p_tokens = self.language_tokenizer(
+                        p_segs[-1], return_tensors="pt", add_special_tokens=False).to(img_embeds.device)
+                    p_embed = self.embed_tokens(p_tokens.input_ids)
+
+                    each_audio_embed = each_audio_embed.unsqueeze(0)
+                    # print('Shape: ', wrapped_emb.shape, p_embed.shape, each_audio_embed.shape)
+
+                    # each_audio_embed will be of shape [1, audio_embedding_dim]
+                    if each_audio_embed is None:
+                        wrapped_emb = torch.cat([wrapped_emb, p_embed], dim=1)
+                    else:
+                        wrapped_emb = torch.cat([wrapped_emb, p_embed, each_audio_embed], dim=1)
+                    
+                    emb_lists.append(wrapped_emb)
 
             emb_lens = [emb.shape[1] for emb in emb_lists]
             pad_emb = self.embed_tokens(torch.tensor(self.language_tokenizer.pad_token_id, device=img_embeds.device))
@@ -239,6 +271,9 @@ class SilVarBase(BaseModel):
                 if not instruction_input.endswith("<Img><ImageHere></Img>"):
                     raise ValueError("You cannot specify both audio and instruction_input at the same time")
             audio_embeds, audio_atts = self.encode_audio(samples["audio"])
+
+        else:
+            audio_embeds, audio_atts = None, None
 
         if 'image' in samples:
             img_embeds, img_atts = self.encode_img(samples["image"])
@@ -375,14 +410,29 @@ class SilVarBase(BaseModel):
         stopping_criteria = StoppingCriteriaList([StoppingCriteriaSub(
             stops=[torch.tensor([i]).to(self.device) for i in stop_words_ids])])
 
-        img_embeds, atts_img = self.encode_img(images.to(self.device))
+        # img_embeds, atts_img = self.encode_img(images.to(self.device))
 
-        image_lists = [[image_emb[None]] for image_emb in img_embeds]
+        # image_lists = [[image_emb[None]] for image_emb in img_embeds]
 
-        audio_embeds, atts_audio = self.encode_audio(audios.to(self.device))
-        audio_embeds = [[audio_embed[None]] for audio_embed in audio_embeds]
+        # audio_embeds, atts_audio = self.encode_audio(audios.to(self.device))
+        # audio_embeds = [[audio_embed[None]] for audio_embed in audio_embeds]
 
-        batch_embs = [self.get_context_emb(text, img_list, audio_embed) for text, img_list, audio_embed in zip(texts, image_lists, audio_embeds)]
+        # batch_embs = [self.get_context_emb(text, img_list, audio_embed) for text, img_list, audio_embed in zip(texts, image_lists, audio_embeds)]
+        
+        # Process images
+        img_embeds, atts_img = self.encode_img(images.to(self.device)) if images is not None else (None, None)
+        image_lists = [[image_emb[None]] for image_emb in img_embeds] if img_embeds is not None else None
+
+        # Process audios only if audios are provided
+        if audios is not None:
+            audio_embeds, atts_audio = self.encode_audio(audios.to(self.device))
+            audio_embeds = [[audio_embed[None]] for audio_embed in audio_embeds]
+        else:
+            audio_embeds = [None] * len(texts)  # Handle the case where audios is None
+
+        # Generate batch embeddings
+        batch_embs = [self.get_context_emb(text, img_list, audio_embed)
+                    for text, img_list, audio_embed in zip(texts, image_lists, audio_embeds)]
 
         batch_size = len(batch_embs)
         max_len = max([emb.shape[1] for emb in batch_embs])

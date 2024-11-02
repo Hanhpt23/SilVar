@@ -21,13 +21,6 @@ class AudioInstruction(Dataset):
         self.text_processor = text_processor
         self.audio_processor = audio_processor
 
-        # if prompt_test is None:
-        #     self.instruction_pool = [
-        #         "[grounding] please describe this image in details with radiological features. Use two sentences unless there are no findings. The first sentence should list the global diseases present in the image, and the second should list local diseases with localized bounding boxes."
-        #         ]
-        # else:
-        #     self.instruction_pool = [prompt_test]
-
         # path: ../data/LISA/json/train.json
         with open(ann_path, 'r') as f:
             self.ann = json.load(f)
@@ -44,17 +37,37 @@ class AudioInstruction(Dataset):
         image = Image.open(image_path).convert("RGB")
         image = self.vis_processor(image)
 
-        answer = info['outputs']
-        # instruction = random.choice(self.instruction_pool)
+
+        # If we have multiple outputs/queries, randomly pick one
+        if isinstance(info['outputs'], list) and len(info['outputs']) > 1:
+            number = random.randint(0, len(info['outputs']) - 1)  # Select a random index for query/output
+
+            answer = info['outputs'][number]  # Select the corresponding answer
+            instruction = info['query'][number]  # Select the corresponding query
+
+            # Finding correct image and audio paths accordingly
+            image_path = os.path.join(self.vis_root, f'{image_id}.jpg') 
+            image = Image.open(image_path).convert("RGB")
+            image = self.vis_processor(image)
+
+            # audio
+            audio_path = os.path.join(self.audio_dir, f'{image_id}_q{number + 1}.wav')  # Assuming audio file naming starts from 1
+            waveform, sample_rate = torchaudio.load(audio_path)
+
+        else:
+            answer = info['outputs']  # Single answer
+            instruction = info['query']  # Single query
+
+            # audio
+            audio_file, _ = os.path.splitext(info['image'])
+            audio_path = os.path.join(self.audio_dir, f'{audio_file}.wav')
+            waveform, sample_rate = torchaudio.load(audio_path)
+            
+        # # For audio instruction
         instruction = "<Img><ImageHere></Img>" 
 
-        # audio
-        audio_file, _ = os.path.splitext(info['image'])
-        audio_path = os.path.join(self.audio_dir, f'{audio_file}.wav')
-        waveform, sample_rate = torchaudio.load(audio_path)
-        # waveform, sample_rate, audio_file = random.choice(self.audio_data) # sample_rate = 24000
-
-        # print('shape of audio before:', waveform.shape, sample_rate)
+        # # For text instruction
+        # instruction = "<Img><ImageHere></Img> {} ".format(instruction)
 
         waveform_array = waveform.squeeze().numpy()
 

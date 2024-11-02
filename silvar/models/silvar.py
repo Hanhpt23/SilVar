@@ -5,6 +5,7 @@ import os
 import torch
 from torch.cuda.amp import autocast as autocast
 import torch.nn as nn
+from torch.nn import TransformerEncoder, TransformerEncoderLayer
 
 from silvar.common.registry import registry
 from silvar.models.base_model import disabled_train
@@ -81,8 +82,28 @@ class SilVar(SilVarBase):
                 nn.GELU(),
                 nn.Linear(IMG_DIM_VIT_LLAMA, self.language_model.config.hidden_size)
             )
+        '''Original layer: 1 Linear layer'''
+        # self.audio_language_proj = nn.Linear(self.audio_encoder.d_model, self.language_model.config.hidden_size)
 
-        self.audio_language_proj = nn.Linear(self.audio_encoder.d_model, self.language_model.config.hidden_size)
+        '''Testing: 2 Linear layers'''
+        self.audio_language_proj = nn.Sequential(
+            nn.Linear(self.audio_encoder.d_model, IMG_DIM_VIT_LLAMA),
+            nn.GELU(),
+            nn.Linear(IMG_DIM_VIT_LLAMA, self.language_model.config.hidden_size)
+        )
+
+        '''Transformer adapter '''
+        # transformer_encoder_layer = nn.TransformerEncoderLayer(
+        #                                 d_model=self.audio_encoder.d_model,  
+        #                                 nhead=8,  # Number of attention heads
+        #                                 dim_feedforward=int(IMG_DIM_VIT_LLAMA/2),  
+        #                                 dropout=0.1  )
+        # self.audio_transformer_encoder = nn.TransformerEncoder(
+        #                                     transformer_encoder_layer,
+        #                                     num_layers=2)
+        # self.audio_language_proj = nn.Sequential(
+        #                     self.audio_transformer_encoder,
+        #                     nn.Linear(self.audio_encoder.d_model, self.language_model.config.hidden_size))
 
         self.chat_template = chat_template
 

@@ -4,7 +4,7 @@ import torch.nn as nn
 class WhisperForLiteGPT(nn.Module):
     def __init__(self):
         super().__init__()
-        self.asr_encoder = WhisperForConditionalGeneration.from_pretrained("openai/whisper-tiny",
+        self.asr_encoder = WhisperForConditionalGeneration.from_pretrained("Hanhpt23/whisper-tiny-silvar",
                                                                            max_source_positions = 1500, # 256 
                                                                            ignore_mismatched_sizes=True
                                                                            ).model.encoder
