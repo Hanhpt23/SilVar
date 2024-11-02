@@ -61,3 +61,35 @@ torchrun --nproc_per_node 2 evaluate.py \
 ```bash
 sbatch scripts/silvar/evaluate.sh
 ```
+
+## Dataset structure
+```
+Silvar
+├── train
+│   ├── audio
+│   ├── images
+│   ├── train.json
+├── test
+│   ├── audio
+│   ├── images
+│   ├── test.json
+
+└── pretrained_checkpoint
+    └── checkpoint_19.pth
+```
+
+### Structure of `Silvar_sets.json`
+```
+[
+      {
+            "query": "",
+            "outputs": "",
+            "image": ""
+      },
+      {
+            "query": "",
+            "outputs": "",
+            "image": ""
+      }
+      ]
+```
