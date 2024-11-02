@@ -1,6 +1,62 @@
-# SILVAR - Reasoning Speech Instruction with Large Visual Language for Object Localization
+# SILVAR - Reasoning Speech Instruction with Visual Language Model for Object Localization and Text Generation
+
+
+## Installation
 
 ```bash
+conda create -n litegpt python=3.10.13
 git clone https://github.com/Hanhpt23/SilVar.git
 cd SilVar
+pip install -r requirements.txt
+```
+
+
+## Training
+### Visual encoder and audio encoder setting
+We have released our checkpoint [here](https://drive.google.com/file/d/1nYrygg9O4NmaxIptW_nQCyrPoP58U-RK/view?usp=drive_link), you can download and use it as a pretrained weight or for inference.
+We also release our pretrained Whisper model on the SilVar, MMMU and ScienceQA datasets: [Hanhpt23/whisper-tiny-silvar](https://huggingface.co/Hanhpt23/whisper-tiny-silvar).
+
+### Training Configuration
+- Set the pretrained checkpoint for downstream tasks [here](train_configs/train.yaml#L10) at Line 10.
+- Set the training image path [here](train_configs/train.yaml#L35) at Line 35
+- Set the training annotation path [here](train_configs/train.yaml#L36) at Line 36
+- Set the training audio path [here](train_configs/train.yaml#L37) at Line 37
+- Set the output directory [here](train_configs/train.yaml#L54) at Line 54
+- Set the wandb token [here](train_configs/train.yaml#L69) at Line 69
+- If you want to train the model end-to-end, set `freeze_vision` and `freeze_audio` to `False` [here](train_configs/train.yaml#L17) on lines 17 and 18
+
+
+### Evaluation Configuration
+- Set the checkpoint [here](eval_configs/evaluate.yaml#L10) at Line 10.
+- Set the evaluation image path [here](eval_configs/evaluate.yaml#L36) at Line 36
+- Set the evaluation annotation path [here](eval_configs/evaluate.yaml#L35) at Line 35
+- Set the evaluation audio path [here](eval_configs/evaluate.yaml#L38) at Line 38
+- Set the output directory [here](eval_configs/evaluate.yaml#L54) at Line 54
+
+### Run
+- To run on a terminal:
+
+```bash
+torchrun --nproc_per_node 2 train.py \
+        --cfg-path train_configs/train.yaml\
+        --cfg-eval-path eval_configs/evaluate.yaml\
+        --eval-dataset audio_val
+```
+
+- To submit to an HPC:
+```bash
+sbatch scripts/silvar/train.sh
+```
+
+## Evaluation
+- To run on a terminal:
+```bash
+torchrun --nproc_per_node 2 evaluate.py \
+      --cfg-path eval_configs/evaluate.yaml\
+      --eval-dataset audio_val
+```
+
+- To submit to an HPC:
+```bash
+sbatch scripts/silvar/evaluate.sh
 ```
