@@ -78,7 +78,7 @@ Silvar
     └── checkpoint_19.pth
 ```
 
-### Structure of `Silvar_sets.json`
+#### Structure of `Silvar_sets.json`
 ```
 [
       {
