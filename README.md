@@ -15,7 +15,6 @@ pip install -r requirements.txt
 ## Training
 ### Visual encoder and audio encoder setting
 We have released our checkpoint [here](https://drive.google.com/file/d/1nYrygg9O4NmaxIptW_nQCyrPoP58U-RK/view?usp=drive_link), you can download and use it as a pretrained weight or for inference.
-We also release our pretrained Whisper model on the SilVar, MMMU and ScienceQA datasets: [Hanhpt23/whisper-tiny-silvar](https://huggingface.co/Hanhpt23/whisper-tiny-silvar).
 
 ### Training Configuration
 - Set the pretrained checkpoint for downstream tasks [here](train_configs/train.yaml#L10) at Line 10.
