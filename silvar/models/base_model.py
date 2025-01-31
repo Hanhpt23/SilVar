@@ -196,11 +196,17 @@ class BaseModel(nn.Module):
         tokenizer = AutoTokenizer.from_pretrained(language_model_path, use_fast=False)
         tokenizer.pad_token = "$$"
 
-        model_args = {}
+        model_args = {
+            "pretrained_model_name_or_path": language_model_path,
+            "rope_scaling": {
+                "type": "dynamic", 
+                "factor": 8.0  
+            }
+        }
+
         if low_resource:
             from transformers import BitsAndBytesConfig
             model_args.update(dict(
-                pretrained_model_name_or_path=language_model_path,
                 device_map={"": low_res_device},
                 quantization_config=BitsAndBytesConfig(
                     load_in_4bit= bits == 4,
@@ -211,16 +217,14 @@ class BaseModel(nn.Module):
                     bnb_4bit_quant_type="nf4"
                 )
             ))
-        else:
-            model_args = {
-                "pretrained_model_name_or_path": language_model_path,
-                "torch_dtype": torch.float16
-            }
 
         if "llama" in language_model_path.lower():
             from silvar.models.language_model.modeling_llama import LlamaForCausalLM
             model = LlamaForCausalLM.from_pretrained(**model_args)
         elif "3-8b" in language_model_path.lower():
+            from silvar.models.language_model.modeling_llama3 import LlamaForCausalLM3
+            model = LlamaForCausalLM3.from_pretrained(**model_args)
+        elif "3.1-8b" in language_model_path.lower():
             from silvar.models.language_model.modeling_llama3 import LlamaForCausalLM3
             model = LlamaForCausalLM3.from_pretrained(**model_args)
         elif "mistral" in language_model_path.lower():

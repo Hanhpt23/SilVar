@@ -267,9 +267,9 @@ class SilVarBase(BaseModel):
     def preparing_embedding(self, samples):
         ### prepare input tokens
         if "audio" in samples and "instruction_input" in samples:
-            for instruction_input in samples["instruction_input"]:
-                if not instruction_input.endswith("<Img><ImageHere></Img>"):
-                    raise ValueError("You cannot specify both audio and instruction_input at the same time")
+            # for instruction_input in samples["instruction_input"]:
+            #     if not instruction_input.endswith("<Img><ImageHere></Img>"):
+            #         raise ValueError("You cannot specify both audio and instruction_input at the same time")
             audio_embeds, audio_atts = self.encode_audio(samples["audio"])
 
         else:
@@ -399,10 +399,10 @@ class SilVarBase(BaseModel):
         '''
             function for generate test use
         '''
-        if audios is not None and texts is not None:
-            for text in texts:
-                if not text.endswith("<Img><ImageHere></Img> [/INST]"):
-                    raise ValueError("You cannot specify both audio and texts at the same time")
+        # if audios is not None and texts is not None:
+        #     for text in texts:
+        #         if not text.endswith("<Img><ImageHere></Img> [/INST]"):
+        #             raise ValueError("You cannot specify both audio and texts at the same time")
                 
         if images is not None and texts is None:
             raise ValueError("You must specify <Img><ImageHere></Img> in the text")

@@ -64,7 +64,7 @@ class AudioInstruction(Dataset):
             waveform, sample_rate = torchaudio.load(audio_path)
             
         # # For audio instruction
-        instruction = "<Img><ImageHere></Img>" 
+        instruction = "<Img><ImageHere></Img>  You are a general assistant helping us analyze the provided images and answer queries from audio." 
 
         # # For text instruction
         # instruction = "<Img><ImageHere></Img> {} ".format(instruction)
