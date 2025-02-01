@@ -1,11 +1,7 @@
 ## SILVAR - Reasoning Speech Instruction with Visual Language Model for Object Localization and Text Generation 🚀
 
-<div align="center">
-  <img src="./image/silvar.png" height="600">
-</div>
-<p align="center">
-  Figure 1: Silvar architecture and training pipeline.
-</p>
+<p  align="center"><img  src="./image/silvar.png"  width="400"></p>
+
 
 **SILVAR** is an end-to-end visual language model using speech as input instruction for reasoning viusal question answering and object localization.
 
