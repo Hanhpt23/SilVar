@@ -16,6 +16,12 @@ pip install -r requirements.txt
 ### Visual encoder and audio encoder setting
 We have released our checkpoint [here](https://drive.google.com/file/d/1flUkhhSJqA-jvzZABAgeIucHpu3WhBSv/view?usp=drive_link), you can download and use it as a pretrained weight or for inference.
 
+### Supported Models:
+- Language models: Our model support Mistral, Llama (2, 3, 3.1), Deepseek R1 (Distill Llama 8B)
+- Vision encoder: Our model support CLIP and its version (biomed_clip, ...) 
+- Audio encoder: Whisper (Tiny, Large)
+
+
 ### Training Configuration
 - Set the pretrained checkpoint for downstream tasks [here](train_configs/train.yaml#L10) at Line 10.
 - Set the training image path [here](train_configs/train.yaml#L35) at Line 35
