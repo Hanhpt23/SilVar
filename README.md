@@ -1,4 +1,4 @@
-# SILVAR - Reasoning Speech Instruction with Visual Language Model for Object Localization and Text Generation 🚀
+### SILVAR - Reasoning Speech Instruction with Visual Language Model for Object Localization and Text Generation 🚀
 
 <p  align="center"><img  src="image/silvar.pdf"  width="400"></p>
 
