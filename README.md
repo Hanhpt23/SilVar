@@ -7,6 +7,14 @@
 
 <p  align="center"><img  src="./image/chatting.png"  width="700"></p>
 
+### Supported Models:
+SILVAR is designed with flexibility in mind, allowing seamless integration with various state-of-the-art models. Currently, the supported models are:
+
+- **Language Models**: Mistral, Llama (2, 3, 3.1), Deepseek R1 (Distill Llama 8B)
+- **Vision Encoders**: CLIP and its variants (e.g., Biomed-CLIP)
+- **Audio Encoders**: Whisper (Tiny, Large)
+
+
 ## Installation
 
 ```bash
@@ -22,10 +30,6 @@ pip install -r requirements.txt
 ### Visual encoder and audio encoder setting
 We have released our checkpoint [here](https://drive.google.com/file/d/1flUkhhSJqA-jvzZABAgeIucHpu3WhBSv/view?usp=drive_link), you can download and use it as a pretrained weight or for inference.
 
-### Supported Models:
-- Language Models: Mistral, Llama (2, 3, 3.1), Deepseek R1 (Distill Llama 8B)
-- Vision Encoders: CLIP and its variants (e.g., Biomed-CLIP)
-- Audio Encoders: Whisper (Tiny, Large)
 
 
 ### Training Configuration
