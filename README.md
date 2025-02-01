@@ -104,3 +104,10 @@ Silvar
       ...
 ]
 ```
+
+
+
+## Update
+-  🔥 January 31, 2025 – We release SILVAR and its trained weights with [DeepSeek R1](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-8B) as the LLM.
+-  🔥 December 20, 2024 – We release the open-source model and trained weights with the vision encoder [CLIP](https://huggingface.co/openai/clip-vit-base-patch16), the audio encoder [Whisper Tiny](https://huggingface.co/openai/whisper-tiny), and the LLM [Llama 3.1 8B](https://huggingface.co/meta-llama/Llama-3.1-8B) .
+- December 15, 2024 – We release the open-source model [here](https://anonymous.4open.science/r/SilVar-8911/README.md).
