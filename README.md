@@ -31,6 +31,7 @@ If you're excited about SILVAR and want to contribute, feel free to open an issu
 
 📩 **Contact us:** hanhpt.phamtan@gmail.com  
 
+---
 
 <p  align="center"><img  src="./image/silvar.png"  width="700"></p>
 
