@@ -11,7 +11,6 @@ SILVAR processes speech **directly** with a **Whisper encoder**, eliminating the
 ✅ **State-of-the-Art Performance** – Competes with top models on **MMMU & ScienceQA**.  
 ✅ **Efficient & Scalable** – Comparable results with fewer parameters.  
 
----
 
 ### **📌 Why SILVAR?**  
 Existing VLMs require text input, but **SILVAR directly understands speech** for object localization and reasoning, pushing the boundaries of speech-driven AI!  
@@ -19,14 +18,11 @@ Existing VLMs require text input, but **SILVAR directly understands speech** for
 🔗 **[Check out the Paper](https://arxiv.org/abs/2412.16771)** | 💻 **[Try the Demo](#)**  
 
 
----
 
 ### **💡 Get Involved**  
 If you're excited about SILVAR and want to contribute, feel free to open an issue or submit a PR! 🚀  
 
 📩 **Contact us:** hanhpt.phamtan@gmail.com  
-
----
 
 
 <p  align="center"><img  src="./image/silvar.png"  width="700"></p>
@@ -36,7 +32,7 @@ If you're excited about SILVAR and want to contribute, feel free to open an issu
 
 <p  align="center"><img  src="./image/chatting.png"  width="700"></p>
 
----
+
 ### **🛠️ Supported Models**  
 SILVAR is designed for flexibility, allowing seamless integration with various state-of-the-art models. Currently, the supported models include:  
 
