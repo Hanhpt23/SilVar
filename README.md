@@ -1,9 +1,32 @@
-## SILVAR - Reasoning Speech Instruction with Visual Language Model for Object Localization and Text Generation 🚀
+
+# **SILVAR** 🚀  
+### **Reasoning Speech Instruction with a Visual Language Model**  
+
+> **The first end-to-end speech-driven VLM for object localization & text generation! 🎙️➡️🖼️**  
+
+SILVAR processes speech **directly** with a **Whisper encoder**, eliminating the need for intermediate text conversion before passing instructions to models like **GPT-4o Mini** or **Gemini 1.5**.  
+
+🔥 **Key Highlights:**  
+✅ **End-to-end Speech-to-Vision Reasoning** – No text conversion needed!  
+✅ **State-of-the-Art Performance** – Competes with top models on **MMMU & ScienceQA**.  
+✅ **Efficient & Scalable** – Comparable results with fewer parameters.  
+
+---
+
+### **📌 Why SILVAR?**  
+Existing VLMs require text input, but **SILVAR directly understands speech** for object localization and reasoning, pushing the boundaries of speech-driven AI!  
+
+🔗 **[Check out the Paper](https://arxiv.org/abs/2412.16771)** | 💻 **[Try the Demo](#)**  
 
 
-Our work is the first to propose an end-to-end speech-driven VLM, where speech is directly input into the model using a Whisper encoder instead of being converted to text before passing it to an encoder such as GPT-4o Mini or Gemini 1.5.
+---
 
-Despite the challenges of speech instruction, SilVar achieves performance comparable to other state-of-the-art (SOTA) models with a similar number of parameters on the MMMU and ScienceQA benchmarks.
+### **💡 Get Involved**  
+If you're excited about SILVAR and want to contribute, feel free to open an issue or submit a PR! 🚀  
+
+📩 **Contact us:** hanhpt.phamtan@gmail.com  
+
+---
 
 
 <p  align="center"><img  src="./image/silvar.png"  width="700"></p>
@@ -13,14 +36,15 @@ Despite the challenges of speech instruction, SilVar achieves performance compar
 
 <p  align="center"><img  src="./image/chatting.png"  width="700"></p>
 
-### Supported Models:
-SILVAR is designed with flexibility in mind, allowing seamless integration with various state-of-the-art models. Currently, the supported models are:
+---
+### **🛠️ Supported Models**  
+SILVAR is designed for flexibility, allowing seamless integration with various state-of-the-art models. Currently, the supported models include:  
 
-- **Language Models**: Mistral, Llama (2, 3, 3.1), Deepseek R1 (Distill Llama 8B)
-- **Vision Encoders**: CLIP and its variants (e.g., Biomed-CLIP)
-- **Audio Encoders**: Whisper and its variants
+- **📝 Language Models**: Mistral, Llama (2, 3, 3.1), Deepseek R1 (Distill Llama 8B)  
+- **🖼️ Vision Encoders**: CLIP and its variants (e.g., Biomed-CLIP)  
+- **🎙️ Audio Encoders**: Whisper and its variants  
 
-
+---
 ## Installation
 
 ```bash
@@ -111,7 +135,7 @@ We would like to thank the following open-source projects:
 - [MiniGPT](https://github.com/Vision-CAIR/MiniGPT-4)
 - [Whisper](https://github.com/openai/whisper)
 - [Llama](https://huggingface.co/meta-llama/Llama-3.1-8B)
-- I also extend my gratitude to my friends, Le Duc Khai and Nguyen Ngoc Son, for their valuable feedback.
+- We also extend our gratitude to our friends, Le Duc Khai and Nguyen Ngoc Son, for their valuable feedback.
 
 ## Citation
 
@@ -123,3 +147,4 @@ We would like to thank the following open-source projects:
   year={2024}
 }
 ```
+
