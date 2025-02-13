@@ -1,5 +1,11 @@
 ## SILVAR - Reasoning Speech Instruction with Visual Language Model for Object Localization and Text Generation 🚀
 
+
+Our work is the first to propose an end-to-end speech-driven VLM, where speech is directly input into the model using a Whisper encoder instead of being converted to text before passing it to an encoder such as GPT-4o Mini or Gemini 1.5.
+
+Despite the challenges of speech instruction, SilVar achieves performance comparable to other state-of-the-art (SOTA) models with a similar number of parameters on the MMMU and ScienceQA benchmarks.
+
+
 <p  align="center"><img  src="./image/silvar.png"  width="700"></p>
 
 
@@ -12,7 +18,7 @@ SILVAR is designed with flexibility in mind, allowing seamless integration with 
 
 - **Language Models**: Mistral, Llama (2, 3, 3.1), Deepseek R1 (Distill Llama 8B)
 - **Vision Encoders**: CLIP and its variants (e.g., Biomed-CLIP)
-- **Audio Encoders**: Whisper (Tiny, Large)
+- **Audio Encoders**: Whisper and its variants
 
 
 ## Installation
@@ -93,21 +99,27 @@ Silvar
     └── checkpoint_19.pth
 ```
 
-#### Structure of `Silvar_sets.json`
-```
-[
-      {
-            "query": "",
-            "outputs": "",
-            "image": ""
-      },
-      ...
-]
-```
-
-
 
 ## Update
--  🔥 January 31, 2025 – We release SILVAR and its trained weights with [DeepSeek R1](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-8B) as the LLM.
--  🔥 December 20, 2024 – We release the open-source model and trained weights with the vision encoder [CLIP](https://huggingface.co/openai/clip-vit-base-patch16), the audio encoder [Whisper Tiny](https://huggingface.co/openai/whisper-tiny), and the LLM [Llama 3.1 8B](https://huggingface.co/meta-llama/Llama-3.1-8B) .
-- December 15, 2024 – We release the open-source model [here](https://anonymous.4open.science/r/SilVar-8911/README.md).
+-  🔥 Ongoing Work: We are exploring its applications in other domains.
+-  🔥 January 31, 2025 – We integrated DeepSeek R1 (Distilled Llama 8B) and released its trained weights [DeepSeek R1](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-8B).
+-  🔥 December 20, 2024 – We updated the code and released trained weights with the vision encoder [CLIP](https://huggingface.co/openai/clip-vit-base-patch16), the audio encoder [Whisper Tiny](https://huggingface.co/openai/whisper-tiny), and the LLM [Llama 3.1 8B](https://huggingface.co/meta-llama/Llama-3.1-8B) .
+- December 15, 2024 – We submitted the paper and released the code anonymously [here](https://anonymous.4open.science/r/SilVar-8911/README.md).
+
+## Acknowledgement
+We would like to thank the following open-source projects:
+- [MiniGPT](https://github.com/Vision-CAIR/MiniGPT-4)
+- [Whisper](https://github.com/openai/whisper)
+- [Llama](https://huggingface.co/meta-llama/Llama-3.1-8B)
+- I also extend my gratitude to my friends, Le Duc Khai and Nguyen Ngoc Son, for their valuable feedback.
+
+## Citation
+
+```bibtex
+@article{pham2024silvar,
+  title={SilVar: Speech Driven Multimodal Model for Reasoning Visual Question Answering and Object Localization},
+  author={Pham, Tan-Hanh and Le, Hoang-Nam and Nguyen, Phu-Vinh and Ngo, Chris and Hy, Truong-Son},
+  journal={arXiv preprint arXiv:2412.16771},
+  year={2024}
+}
+```
