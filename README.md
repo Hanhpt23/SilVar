@@ -18,6 +18,13 @@ Existing VLMs require text input, but **SILVAR directly understands speech** for
 🔗 **[Check out the Paper](https://arxiv.org/abs/2412.16771)** | 💻 **[Try the Demo](#)**  
 
 
+### **🛠️ Supported Models**  
+SILVAR is designed for flexibility, allowing seamless integration with various state-of-the-art models. Currently, the supported models include:  
+
+- **📝 Language Models**: Mistral, Llama (2, 3, 3.1), Deepseek R1 (Distill Llama 8B)  
+- **🖼️ Vision Encoders**: CLIP and its variants (e.g., Biomed-CLIP)  
+- **🎙️ Audio Encoders**: Whisper and its variants  
+
 
 ### **💡 Get Involved**  
 If you're excited about SILVAR and want to contribute, feel free to open an issue or submit a PR! 🚀  
@@ -33,12 +40,6 @@ If you're excited about SILVAR and want to contribute, feel free to open an issu
 <p  align="center"><img  src="./image/chatting.png"  width="700"></p>
 
 
-### **🛠️ Supported Models**  
-SILVAR is designed for flexibility, allowing seamless integration with various state-of-the-art models. Currently, the supported models include:  
-
-- **📝 Language Models**: Mistral, Llama (2, 3, 3.1), Deepseek R1 (Distill Llama 8B)  
-- **🖼️ Vision Encoders**: CLIP and its variants (e.g., Biomed-CLIP)  
-- **🎙️ Audio Encoders**: Whisper and its variants  
 
 ---
 ## Installation
