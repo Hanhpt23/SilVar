@@ -128,7 +128,7 @@ Silvar
 -  🔥 December 20, 2024 – We updated the code and released trained weights with the vision encoder [CLIP](https://huggingface.co/openai/clip-vit-base-patch16), the audio encoder [Whisper Tiny](https://huggingface.co/openai/whisper-tiny), and the LLM [Llama 3.1 8B](https://huggingface.co/meta-llama/Llama-3.1-8B) .
 - December 15, 2024 – We submitted the paper and released the code anonymously [here](https://anonymous.4open.science/r/SilVar-8911/README.md).
 
-## Acknowledgement
+<!-- ## Acknowledgement
 We would like to thank the following open-source projects:
 - [MiniGPT](https://github.com/Vision-CAIR/MiniGPT-4)
 - [Whisper](https://github.com/openai/whisper)
@@ -145,4 +145,4 @@ We would like to thank the following open-source projects:
   year={2024}
 }
 ```
-
+ -->
