@@ -15,7 +15,7 @@ SILVAR processes speech **directly** with a **Whisper encoder**, eliminating the
 ### **📌 Why SILVAR?**  
 Existing VLMs require text input, but **SILVAR directly understands speech** for object localization and reasoning, pushing the boundaries of speech-driven AI!  
 
-🔗 **[Check out the Paper](https://arxiv.org/abs/2412.16771)** | 💻 **[Try the Demo](#)**  
+<!-- 🔗 **[Check out the Paper](https://arxiv.org/abs/2412.16771)** | 💻 **[Try the Demo](#)**   -->
 
 
 ### **🛠️ Supported Models**  
