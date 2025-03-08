@@ -26,10 +26,10 @@ SILVAR is designed for flexibility, allowing seamless integration with various s
 - **🎙️ Audio Encoders**: Whisper and its variants  
 
 
-### **💡 Get Involved**  
+<!-- ### **💡 Get Involved**  
 If you're excited about SILVAR and want to contribute, feel free to open an issue or submit a PR! 🚀  
 
-📩 **Contact us:** hanhpt.phamtan@gmail.com  
+📩 **Contact us:** hanhpt.phamtan@gmail.com   -->
 
 ---
 
